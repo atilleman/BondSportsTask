@@ -24,8 +24,10 @@ export class PlayersListComponent implements OnInit  {
   dataSource: MatTableDataSource<NBAPlayers>;
   dataSource2: MatTableDataSource<NBAPlayerStats>;
   cursor = 0;
+  page = 0;
   per_page = 25;
-  existingCursors: number[] = [];
+  isNextPage = false;
+  existingPages: number[] = [];
   allNBAInfo: NBAInfo[] = [];
 
   constructor(public playersStateService: PlayersStateService) { }
@@ -39,11 +41,22 @@ export class PlayersListComponent implements OnInit  {
     let results = await this.playersStateService.getPlayersFromState();
     if (results != undefined){
       results.forEach(element => {
+        if (this.isNextPage){
+          if (element.nextPage != undefined){
+            this.cursor = element.nextPage;
+          }
+        } else {
+          if (element.previousPage != undefined){
+            this.cursor = element.previousPage;
+          }
+        }
+        
         this.allNBAInfo.push(element);
       });
     }
-    if (this.existingCursors.filter(item => item == this.cursor).length == 0) {
-      this.existingCursors.push(this.cursor);
+    console.log(this.existingPages);
+    if (this.existingPages.filter(item => item == this.page).length == 0) {
+      this.existingPages.push(this.page);
       await this.playersStateService.getPlayers({
         cursor: this.cursor,
         first_name: '',
@@ -58,17 +71,16 @@ export class PlayersListComponent implements OnInit  {
         this.setPlayersList(allPlayers);
       });
     } else {
-      const existingData: NBAInfo[] = await this.playersStateService.getPlayersFromState();
-      this.setPlayersList(existingData);
+      this.setPlayersList(results);
     }
   }
 
   setPlayersList(results: NBAInfo[]) {
     if (results != undefined) {
-      this.allPlayers = results[this.cursor].players;
-      this.playerStats = results[this.cursor].playerStats;
+      this.allPlayers = results[this.page].players;
+      this.playerStats = results[this.page].playerStats;
       this.dataSource = new MatTableDataSource(this.allPlayers);
-      this.setPlayerStats(results[this.cursor].playerStats, results[this.cursor].players);
+      this.setPlayerStats(results[this.page].playerStats, results[this.page].players);
     }
   }
 
@@ -86,20 +98,23 @@ export class PlayersListComponent implements OnInit  {
   }
 
   movePrevious(){
-    if (this.cursor != 0){
-      this.cursor--;
+    if (this.page != 0){
+      this.page--;
+      this.isNextPage = false;
       this.getPlayers();
     }
   }
 
   moveNext(){
-    this.cursor++;
+    this.page++;
+    this.isNextPage = true;
     this.getPlayers();
   }
 
   changeListSize(evt: any){
     this.cursor = 0;
-    this.existingCursors = [];
+    this.page = 0;
+    this.existingPages = [];
     this.playersStateService.resetPlayersState();
     this.per_page = evt.target.value;
     this.getPlayers();

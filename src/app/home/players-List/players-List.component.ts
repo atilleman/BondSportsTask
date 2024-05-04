@@ -54,7 +54,6 @@ export class PlayersListComponent implements OnInit  {
         this.allNBAInfo.push(element);
       });
     }
-    console.log(this.existingPages);
     if (this.existingPages.filter(item => item == this.page).length == 0) {
       this.existingPages.push(this.page);
       await this.playersStateService.getPlayers({

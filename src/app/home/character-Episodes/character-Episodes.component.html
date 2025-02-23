@@ -1,0 +1,25 @@
+<div>
+  <app-menuBar></app-menuBar>
+</div>
+<div>
+  <app-characters-Header></app-characters-Header>
+</div>
+<div class="flex">
+  <div class="container">
+    <div>Search: </div>
+    <div>
+        <input type="text" (keyup)="textFilter($event)">
+    </div>
+  </div>
+</div>
+
+<div>
+  <div *ngFor="let episode of randomEpisodes; let i = index">
+    <div class="flex">
+      <div class="container">
+        <div>ID: {{ (episode.id) }}</div>
+        <div>Name: {{ (episode.name) }}</div>
+      </div>
+    </div>
+  </div>
+</div>

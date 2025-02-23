@@ -10,26 +10,34 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
-import { PlayersListComponent } from './home/players-List/players-List.component';
+import { CharactersListComponent } from './home/characters-List/characters-List.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { PlayersSearchComponent } from './home/players-search/players-search.component';
-import { PlayersStateService } from './state/players-state.service';
-import { StateHelperService } from './services/state-helper.service';
-import { PlayersApiService } from './state/players-api.service';
-import { NgxsModule } from '@ngxs/store';
-import { PlayersState } from './state/players.state';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { InfiniteScrollDirective } from 'ngx-infinite-scroll';
+import { CharactersMainComponent } from './home/characters-Main/characters-Main.component';
+import { CharactersGridComponent } from './home/characters-Grid/characters-Grid.component';
+import { CharactersSearchComponent } from './home/characters-search/characters-search.component';
+import { CharacterDetailsComponent } from './home/character-Details/character-Details.component';
+import { CharacterEpisodesComponent } from './home/character-Episodes/character-Episodes.component';
+import { CharactersHeaderComponent } from './home/characters-Header/characters-Header.component';
+import { MenuBarComponent } from './home/menuBar/menuBar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    PlayersListComponent,
-    PlayersSearchComponent,
+    CharactersListComponent,
+    CharactersMainComponent,
+    CharactersGridComponent,
+    CharactersSearchComponent,
+    CharacterDetailsComponent,
+    CharacterEpisodesComponent,
+    CharactersHeaderComponent,
+    MenuBarComponent
   ],
   imports: [
-    NgxsModule.forRoot([PlayersState]),
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -41,12 +49,11 @@ import { PlayersState } from './state/players.state';
     MatInputModule,
     MatTabsModule,
     MatTableModule,
-    MatPaginatorModule 
+    MatPaginatorModule,
+    MatSlideToggleModule,
+    InfiniteScrollDirective
   ],
-  providers: [
-    PlayersApiService,
-    PlayersStateService,
-    StateHelperService],
+  providers: [],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

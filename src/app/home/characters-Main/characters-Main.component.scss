@@ -1,0 +1,25 @@
+.boxes {
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+.container {
+  display: flex;
+  gap: 5px;
+  flex-wrap:wrap;
+  justify-content: space-between;
+}
+
+.title {
+  max-width: 10vw;
+}
+
+img {
+  max-height: 20vh;
+  max-width: 20vw;
+}
+
+.hide { display: none; }
+
+
+

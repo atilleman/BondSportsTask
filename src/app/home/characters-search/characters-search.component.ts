@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
-  selector: 'app-players-search',
-  templateUrl: './players-search.component.html',
-  styleUrls: ['./players-search.component.scss']
+  selector: 'app-characters-search',
+  templateUrl: './characters-search.component.html',
+  styleUrls: ['./characters-search.component.scss']
 })
-export class PlayersSearchComponent {
+export class CharactersSearchComponent {
 
   @Output() filterSearch = new EventEmitter<string>();
   

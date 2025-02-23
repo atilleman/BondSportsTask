@@ -1,0 +1,47 @@
+<div>
+  <div>
+    <app-menuBar></app-menuBar>
+  </div>
+  <div>
+    <app-characters-Header></app-characters-Header>
+  </div>
+  <div class="flex">
+    <mat-slide-toggle [(ngModel)]="isChecked">List View Toggle</mat-slide-toggle>
+  </div>
+  <div [ngClass]="{'hide' : isChecked}" class="flex">
+    <div class="container" infiniteScroll [infiniteScrollDistance]="0.5" infinite-scroll-parent="false"
+    [infiniteScrollDisabled]="isChecked" (scrolled)="onScroll($event)">
+      <div *ngFor="let character of characters; let i = index">
+        <div class="boxes" (click)="getCharacterDetails(character.id)">
+          <div>
+            <img [src]="character.image">
+          </div>
+          <div>
+            <div class="title">{{ character.name }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div [ngClass]="{'hide' : !isChecked}" class="flex">
+    <mat-tab-group animationDuration="0ms">
+      <mat-tab label="List View">
+        <div>
+          <app-characters-search (filterSearch)="filterSearchList($event)"></app-characters-search>
+        </div>
+        <div>
+          <app-characters-List [characters]="characters"></app-characters-List>
+        </div>
+      </mat-tab>
+      <mat-tab label="Grid View">
+        <div>
+          <app-characters-search (filterSearch)="filterSearchGrid($event)"></app-characters-search>
+        </div>
+        <div>
+          <app-characters-Grid [dataSource]="dataSource"></app-characters-Grid>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>

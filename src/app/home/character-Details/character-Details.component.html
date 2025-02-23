@@ -1,0 +1,25 @@
+<div>
+  <div>
+    <app-menuBar></app-menuBar>
+  </div>
+  <div>
+    <app-characters-Header></app-characters-Header>
+  </div>
+  <div class="flex">
+    <ng-container *ngIf="characterDetails$ | async as characterDetails">
+      <div class="container">
+        <div>ID: {{ (characterDetails.id) }}</div>
+        <div>Name: {{ (characterDetails.name) }}</div>
+      </div>
+      <div class="container">
+        <div>Status: {{ characterDetails.status }}</div>
+        <div>Species {{ characterDetails.species }}</div>
+      </div>
+      <div class="container">
+        <div>Type: {{ characterDetails.type }}</div>
+        <div>Gender: {{ characterDetails.gender }}</div>
+      </div>
+    </ng-container>
+  </div>
+</div>
+

@@ -3,7 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  gw: 'http://localhost:5048/NBAPlayers/',
+  gw: 'https://rickandmortyapi.com/api/',
   production: false
 };
 

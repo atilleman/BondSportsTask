@@ -1,5 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
-import { PlayersListComponent } from './players-List/players-List.component';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -8,9 +7,5 @@ import { PlayersListComponent } from './players-List/players-List.component';
 })
 export class HomeComponent {
 
-  @ViewChild(PlayersListComponent) playersListComponent: PlayersListComponent;
-
-  filterSearch(searchText: any){
-    this.playersListComponent.textFilter(searchText);
-  }
+  
 }
